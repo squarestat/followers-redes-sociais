@@ -1,0 +1,30 @@
+name: coletar seguidores
+
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: instalar R
+        uses: r-lib/actions/setup-r@v2
+
+      - name: instalar pacotes
+        run: Rscript -e 'install.packages(c("httr","jsonlite"))'
+
+      - name: rodar script
+        run: Rscript coleta_instagram.R
+
+      - name: salvar resultados
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "update followers"
+          git push
