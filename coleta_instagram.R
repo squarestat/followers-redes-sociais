@@ -1,3 +1,6 @@
+if(!require(httr)) install.packages("httr", repos="https://cloud.r-project.org")
+if(!require(jsonlite)) install.packages("jsonlite", repos="https://cloud.r-project.org")
+
 library(httr)
 library(jsonlite)
 
