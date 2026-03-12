@@ -1,8 +1,11 @@
-if(!require(httr)) install.packages("httr", repos="https://cloud.r-project.org")
-if(!require(jsonlite)) install.packages("jsonlite", repos="https://cloud.r-project.org")
+packages <- c("httr", "jsonlite")
 
-library(httr)
-library(jsonlite)
+for (p in packages) {
+  if (!require(p, character.only = TRUE)) {
+    install.packages(p, repos = "https://cloud.r-project.org")
+    library(p, character.only = TRUE)
+  }
+}
 
 get_followers <- function(username){
 
