@@ -26,22 +26,3 @@ get_followers <- function(username){
 
   data$data$user$edge_followed_by$count
 }
-
-users <- c("fgvibre")
-
-followers <- sapply(users, get_followers)
-
-dados <- data.frame(
-  data = Sys.Date(),
-  username = users,
-  followers = followers
-)
-
-arquivo <- "followers_historico.csv"
-
-if(file.exists(arquivo)){
-  antigo <- read.csv(arquivo)
-  dados <- rbind(antigo, dados)
-}
-
-write.csv(dados, arquivo, row.names = FALSE)
